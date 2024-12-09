@@ -25,7 +25,9 @@ jobs:
           
       # Authenticate to Salesforce Org using a GitHub secret
       - name: Authenticate to Salesforce Org
-        run: echo ${{ secrets.SF_AUTH }} | sfdx auth:sfdxurl:store -f -
+        run: |
+          echo "${{ secrets.SF_AUTH }}" > auth-url.txt
+          sfdx auth:sfdxurl:store -f auth-url.txt -a ${{ secrets.SF_ALIAS }}
 
       # Deploy source to Salesforce Org
       - name: Deploy to Salesforce
