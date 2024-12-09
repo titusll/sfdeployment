@@ -1,0 +1,31 @@
+name: Salesforce Deployment
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main  # Trigger on PR merge into 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Set up Salesforce CLI (SFDX)
+      - name: Set up Salesforce CLI
+        uses: sf/actions/setup-sfdx-cli@v1
+        with:
+          sfdx-cli-version: latest
+
+      # Authenticate to Salesforce Org using a GitHub secret
+      - name: Authenticate to Salesforce Org
+        run: echo ${{  force://PlatformCLI::5Aep861iCXbTx3lghSQUZGesHb8TYv9W2bKfDqXZoxG_nkBJxZmCTaAbVqfRWz3iEMOHhx_HoywKTPV6_10f16H@mindful-panda-czyjsb-dev-ed.trailblaze.my.salesforce.com }} | sfdx auth:sfdxurl:store -f -
+
+      # Deploy source to Salesforce Org
+      - name: Deploy to Salesforce
+        run: |
+          sfdx force:source:deploy -p force-app --targetusername ${{ masterOrg }} --checkonly --verbose
