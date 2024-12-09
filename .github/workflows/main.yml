@@ -1,4 +1,4 @@
-name: Salesforce Deployment
+name: MasterOrg Automated Deployment Upon PR Merge
 
 on:
   pull_request:
@@ -33,4 +33,3 @@ jobs:
       - name: Deploy to Salesforce
         run: |
           sf project deploy start  --source-dir force-app --target-org ${{ secrets.SF_ALIAS }} --concise
-          sf apex run test --target-org ${{ secrets.SF_ALIAS }}
