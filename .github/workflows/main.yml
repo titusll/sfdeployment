@@ -15,12 +15,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      # Set up Salesforce CLI (SFDX)
+      # Set up Salesforce CLI (SFDX) using the correct action
       - name: Set up Salesforce CLI
-        uses: sf/actions/setup-sfdx-cli@v1
+        uses: forcedotcom/cli-action@v1.0.0
         with:
           sfdx-cli-version: latest
-
+          
       # Authenticate to Salesforce Org using a GitHub secret
       - name: Authenticate to Salesforce Org
         run: echo ${{ secrets.SF_AUTH }} | sfdx auth:sfdxurl:store -f -
