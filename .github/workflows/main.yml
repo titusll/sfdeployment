@@ -17,7 +17,7 @@ jobs:
 
       # Set up Salesforce CLI (SFDX) using the correct action
       - name: Set up Salesforce CLI
-        uses: forcedotcom/cli-action@v1.0.0
+        uses: salesforce-cli-action/setup@v1
         with:
           sfdx-cli-version: latest
           
