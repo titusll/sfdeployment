@@ -32,4 +32,4 @@ jobs:
       # Deploy source to Salesforce Org
       - name: Deploy to Salesforce
         run: |
-          sfdx force:source:deploy -p force-app --targetusername ${{ secrets.SF_ALIAS }} --checkonly --verbose
+          sf project deploy start  --source-dir force-app --target-org ${{ secrets.SF_ALIAS }} --concise
