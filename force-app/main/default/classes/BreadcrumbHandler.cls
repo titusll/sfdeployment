@@ -1,5 +1,3 @@
-import List;
-
 public with sharing class BreadcrumbHandler {
     public BreadcrumbHandler() {
 
