@@ -24,12 +24,15 @@ jobs:
           sf --version
           
       # Authenticate to Salesforce Org using a GitHub secret
+      # Write the SF auth url to a txt file, then authenticate the org using url in this file,
+      # Set an alias for org
       - name: Authenticate to Salesforce Org
         run: |
-          echo "${{ secrets.SF_AUTH }}" > auth-url.txt
+          echo "${{ secrets.SF_AUTH }}" > auth-url.txt 
           sfdx auth:sfdxurl:store -f auth-url.txt -a ${{ secrets.SF_ALIAS }}
 
       # Deploy source to Salesforce Org
+      # Deploy all those delta in "force-app" path and downwards
       - name: Deploy to Salesforce
         run: |
           sf project deploy start  --source-dir force-app --target-org ${{ secrets.SF_ALIAS }}
