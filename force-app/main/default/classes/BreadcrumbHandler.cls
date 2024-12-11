@@ -1,19 +1,15 @@
 public with sharing class BreadcrumbHandler {
-    public BreadcrumbHandler() {
-
-    }
 
     @AuraEnabled(cacheable=true)
     public static List<String> getBreadcrumbList(){
 
-        List<String> list = new List<String>();
+        List<String> lists = new List<String>();
 
-        list.add('Hello');
-        list.add('This');
-        list.add('Has');
-        list.add('Worked');
+        lists.add('Hello');
+        lists.add('This');
+        lists.add('Has');
+        lists.add('Worked');
 
-        return list;
+        return lists;
     }
-
 }
