@@ -4,13 +4,13 @@ public with sharing class MapPractice {
 
         List<Map<Id, String>> helloMap = new List<Map<Id, String>>();
 
-        List<Opportunity> opps = [SELECT Id, Name FROM Opoprtunity];
-        List<Opportunity> accs = [SELECT Id, Name FROM Accounts];
-        List<Opportunity> cases = [SELECT Id, Name FROM Cases];
+        List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
+        List<Account> accs = [SELECT Id, Name FROM Account];
+        List<Case> cases = [SELECT Id, Name FROM Case];
 
-        Map<Id, String> oppMap = new Map<Id, String>(opps);
-        Map<Id, String> accMap = new Map<Id, String>(accs);
-        Map<Id, String> caseMap = new Map<Id, String>(cases);
+        Map<Id, String> oppMap = new Map<Id, String>();
+        Map<Id, String> accMap = new Map<Id, String>();
+        Map<Id, String> caseMap = new Map<Id, String>();
 
         for (Opportunity opp : opps){
             oppMap.put(opp.Id, opp.Name);
@@ -22,6 +22,8 @@ public with sharing class MapPractice {
             caseMap.put(case.Id, case.Name);
         }
 
-        helloMap.add(oppMap, accMap, caseMap);
+        helloMap.add(oppMap);
+        helloMap.add(accMap);
+        helloMap.add(caseMap);
     }
 }
