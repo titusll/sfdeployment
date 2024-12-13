@@ -18,8 +18,8 @@ public with sharing class MapPractice {
         for (Account acc : accs){
             accMap.put(acc.Id, acc.Name);
         }
-        for (Case case : cases){
-            caseMap.put(case.Id, case.CaseNumber);
+        for (Case c : cases){
+            caseMap.put(c.Id, c.CaseNumber);
         }
 
         helloMap.add(oppMap);
