@@ -10,7 +10,7 @@ public with sharing class MapPractice {
 
         Map<Id, String> oppMap = new Map<Id, String>();
         Map<Id, String> accMap = new Map<Id, String>();
-        Map<Id, Integer> caseMap = new Map<Id, String>();
+        Map<Id, String> caseMap = new Map<Id, String>();
 
         for (Opportunity opp : opps){
             oppMap.put(opp.Id, opp.Name);
