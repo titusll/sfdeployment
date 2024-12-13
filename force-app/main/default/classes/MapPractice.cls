@@ -10,7 +10,7 @@ public with sharing class MapPractice {
 
         Map<Id, String> oppMap = new Map<Id, String>();
         Map<Id, String> accMap = new Map<Id, String>();
-        Map<Id, String> caseMap = new Map<Id, String>();
+        Map<Id, Integer> caseMap = new Map<Id, String>();
 
         for (Opportunity opp : opps){
             oppMap.put(opp.Id, opp.Name);
@@ -19,7 +19,7 @@ public with sharing class MapPractice {
             accMap.put(acc.Id, acc.Name);
         }
         for (Case case : cases){
-            caseMap.put(case.Id, case.Name);
+            caseMap.put(case.Id, case.CaseNumber);
         }
 
         helloMap.add(oppMap);
