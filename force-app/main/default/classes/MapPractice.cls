@@ -6,7 +6,7 @@ public with sharing class MapPractice {
 
         List<Opportunity> opps = [SELECT Id, Name FROM Opportunity];
         List<Account> accs = [SELECT Id, Name FROM Account];
-        List<Case> cases = [SELECT Id, Name FROM Case];
+        List<Case> cases = [SELECT Id, CaseNumber FROM Case];
 
         Map<Id, String> oppMap = new Map<Id, String>();
         Map<Id, String> accMap = new Map<Id, String>();
