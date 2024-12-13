@@ -25,5 +25,13 @@ public with sharing class MapPractice {
         helloMap.add(oppMap);
         helloMap.add(accMap);
         helloMap.add(caseMap);
+        
+        for (Map<Id, String> eachMap : helloMap){
+            for (Id i : eachMap.keySet()){
+                System.debug('Key: ' + i);
+                System.debug('Value: ' + eachMap.get(i));
+            }
+            System.debug('END OF MAP');
+        }
     }
 }
