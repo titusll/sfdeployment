@@ -1,0 +1,58 @@
+name: MasterOrg Automated Deployment Upon PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main  # Trigger on PR merge into 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Set up Salesforce CLI (SFDX) using the correct action
+      - name: "Install Salesforce CLI"
+        run: |
+          npm install @salesforce/cli --location=global
+          nodeInstallPath=$(npm config get prefix)
+          echo "$nodeInstallPath/bin" >> $GITHUB_PATH
+          sf --version
+
+      # Authenticate to Salesforce Org using a GitHub secret
+      - name: Authenticate to Salesforce Org
+        run: |
+          echo "${{ secrets.SF_AUTH }}" > auth-url.txt 
+          sfdx auth:sfdxurl:store -f auth-url.txt -a ${{ secrets.SF_ALIAS }}
+
+      # Check for changes between the PR and the main branch
+      - name: Check for changed files
+        id: check_changes
+        run: |
+          # Get a list of files changed in the pull request
+          CHANGED_FILES=$(git diff --name-only origin/main)
+          
+          # If there are changes, print them
+          echo "Changed files: $CHANGED_FILES"
+          
+          # Set the output for the next step
+          echo "::set-output name=changed_files::$CHANGED_FILES"
+
+      # Conditional deployment: Only deploy if there are changed files
+      - name: Deploy to Salesforce
+        if: steps.check_changes.outputs.changed_files != ''
+        run: |
+          CHANGED_FILES=${{ steps.check_changes.outputs.changed_files }}
+          echo "Deploying the following changed files: $CHANGED_FILES"
+          
+          # Deploy only the changed files
+          sf project deploy start --source-dir force-app --target-org ${{ secrets.SF_ALIAS }} --manifest $CHANGED_FILES
+          
+      # If no changes, skip deployment
+      - name: Skip deployment if no changes
+        if: steps.check_changes.outputs.changed_files == ''
+        run: echo "No changes detected, skipping deployment."
