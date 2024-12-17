@@ -34,7 +34,7 @@ jobs:
         id: check_changes
         run: |
           # Get a list of files changed in the pull request
-          CHANGED_FILES=$(git diff --name-only origin/main)
+          CHANGED_FILES=$(git diff --name-only sfdeployment/main)
           
           # If there are changes, print them
           echo "Changed files: $CHANGED_FILES"
