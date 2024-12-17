@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>BrushAway__c</fullName>
     <externalId>false</externalId>
-    <label>BrushAway</label>
+    <label>BrushAway2</label>
     <length>10</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
